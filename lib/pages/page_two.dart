@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:singleton_state_management/models/user.dart';
+import 'package:singleton_state_management/services/user_service.dart';
 
 class PageTwo extends StatelessWidget {
   const PageTwo({Key? key}) : super(key: key);
@@ -6,9 +9,11 @@ class PageTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userService = Provider.of<UserService>(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text('PageTwo'),
+          title:
+              Text(userService.userExists ? userService.user!.name : 'PageTwo'),
         ),
         body: Container(
           height: MediaQuery.of(context).size.height,
@@ -24,7 +29,14 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  final newUser = User(name: "Esteban", age: 25);
+                  newUser.profesions = [
+                    'Android Developer',
+                    'FrontEnd developer'
+                  ];
+                  userService.user = newUser;
+                },
               ),
               MaterialButton(
                 child: const Text(
@@ -34,7 +46,9 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  userService.setAge(40);
+                },
               ),
               MaterialButton(
                 child: const Text(
@@ -44,7 +58,7 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () => userService.addProfession(),
               ),
             ],
           ),
