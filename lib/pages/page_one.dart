@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:singleton_state_management/models/user.dart';
 import 'package:singleton_state_management/pages/page_two.dart';
+import 'package:singleton_state_management/services/user_service.dart';
 
 class PageOne extends StatelessWidget {
   const PageOne({Key? key}) : super(key: key);
@@ -8,9 +10,18 @@ class PageOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PageOne'),
+        title: const Text('PageOne'),
       ),
-      body: UserInfo(),
+      body: StreamBuilder(
+          stream: userService.userStream,
+          builder: (_, AsyncSnapshot<User?> snap) {
+            if (snap.hasData && snap.data != null) {
+              return UserInfo(
+                user: snap.data!,
+              );
+            }
+            return const Center(child: Text('There is not available user'));
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(context, PageTwo.routeName),
       ),
@@ -19,8 +30,8 @@ class PageOne extends StatelessWidget {
 }
 
 class UserInfo extends StatelessWidget {
-  const UserInfo({Key? key}) : super(key: key);
-
+  const UserInfo({Key? key, required this.user}) : super(key: key);
+  final User user;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +40,7 @@ class UserInfo extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Text(
             'General',
             style: TextStyle(
@@ -38,8 +49,8 @@ class UserInfo extends StatelessWidget {
             ),
           ),
           Divider(),
-          ListTile(title: Text('Nombre')),
-          ListTile(title: Text('Edad')),
+          ListTile(title: Text('Nombre: ${user.name}')),
+          ListTile(title: Text('Edad: ${user.age}')),
           Text(
             'Profesiones',
             style: TextStyle(
