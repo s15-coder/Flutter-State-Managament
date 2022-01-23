@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:singleton_state_management/bloc/user_cubit.dart';
+import 'package:singleton_state_management/models/user.dart';
 
 class PageTwo extends StatelessWidget {
   const PageTwo({Key? key}) : super(key: key);
@@ -6,6 +9,7 @@ class PageTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userCubit = context.read<UserCubit>();
     return Scaffold(
         appBar: AppBar(
           title: Text('PageTwo'),
@@ -24,7 +28,10 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  final newUser = User(age: 25, name: "Esteban");
+                  userCubit.setNewUser(newUser);
+                },
               ),
               MaterialButton(
                 child: const Text(
@@ -34,7 +41,7 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () => userCubit.setAge(40),
               ),
               MaterialButton(
                 child: const Text(
@@ -44,7 +51,7 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () => userCubit.addProfession(),
               ),
             ],
           ),
