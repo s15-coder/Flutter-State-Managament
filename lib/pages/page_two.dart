@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:singleton_state_management/controllers/user_controller.dart';
+import 'package:singleton_state_management/models/user.dart';
 
 class PageTwo extends StatelessWidget {
   const PageTwo({Key? key}) : super(key: key);
-  static const routeName = 'PageTwo';
+  static const routeName = '/PageTwo';
 
   @override
   Widget build(BuildContext context) {
+    final userController = Get.find<UserController>();
     return Scaffold(
         appBar: AppBar(
           title: Text('PageTwo'),
@@ -17,15 +21,27 @@ class PageTwo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MaterialButton(
-                child: const Text(
-                  'Establecer usuario',
-                  style: TextStyle(
-                    color: Colors.white,
+                  child: const Text(
+                    'Establecer usuario',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                color: Colors.blue,
-                onPressed: () {},
-              ),
+                  color: Colors.blue,
+                  onPressed: () {
+                    userController.loadUser(User(
+                      name: 'Esteban',
+                      age: 20,
+                    ));
+                    Get.snackbar('User created!', 'The username is Esteban',
+                        backgroundColor: Colors.white,
+                        boxShadows: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 10,
+                          )
+                        ]);
+                  }),
               MaterialButton(
                 child: const Text(
                   'Establecer edad',
@@ -34,7 +50,7 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () => userController.changeAge(25),
               ),
               MaterialButton(
                 child: const Text(
@@ -44,7 +60,21 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () => userController.addProfession(
+                    'Profession: #${userController.professionsCount + 1}'),
+              ),
+              MaterialButton(
+                child: const Text(
+                  'Change theme',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                color: Colors.blue,
+                onPressed: () {
+                  Get.changeTheme(
+                      Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
+                },
               ),
             ],
           ),
