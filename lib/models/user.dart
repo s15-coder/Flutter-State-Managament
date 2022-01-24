@@ -1,10 +1,20 @@
 class User {
   String name;
   int age;
-  List<String> profesions;
+  List<String> professions;
   User({
     required this.name,
     required this.age,
-    required this.profesions,
+    this.professions = const [],
   });
+  User copyWith({
+    String? name,
+    int? age,
+    List<String>? professions,
+  }) =>
+      User(
+        professions: professions ?? this.professions,
+        age: age ?? this.age,
+        name: name ?? this.name,
+      );
 }

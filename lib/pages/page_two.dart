@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:singleton_state_management/bloc/user/user_bloc.dart';
+import 'package:singleton_state_management/models/user.dart';
 
 class PageTwo extends StatelessWidget {
   const PageTwo({Key? key}) : super(key: key);
@@ -6,11 +9,13 @@ class PageTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userBloc = BlocProvider.of<UserBloc>(context);
+
     return Scaffold(
         appBar: AppBar(
-          title: Text('PageTwo'),
+          title: const Text('PageTwo'),
         ),
-        body: Container(
+        body: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -24,7 +29,13 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  final newUser = User(
+                      name: "Esteban",
+                      age: 20,
+                      professions: ['Android Developer']);
+                  userBloc.add(EnableUserEvent(newUser));
+                },
               ),
               MaterialButton(
                 child: const Text(
@@ -34,7 +45,7 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () => userBloc.add(ChangeUserAgeEvent(15)),
               ),
               MaterialButton(
                 child: const Text(
@@ -44,7 +55,7 @@ class PageTwo extends StatelessWidget {
                   ),
                 ),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () => userBloc.add(AddProfessionEvent()),
               ),
             ],
           ),
