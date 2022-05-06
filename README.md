@@ -1,6 +1,6 @@
 # State Management
 
-A flutter project created along the [Fernando Herrera course](https://www.udemy.com/course/flutter-avanzado-fernando-herrera/) where explains the differences between the different state management alternatives.
+A flutter project created along the [Fernando Herrera course](https://www.udemy.com/course/flutter-avanzado-fernando-herrera/) where explains the differences between the state management alternatives in a very simple way.
 
 State management types explained:
 1. [GetX](https://pub.dev/packages/get) - [GetX branch]( https://github.com/s15-coder/Flutter-State-Managament/tree/branch/GetX)
