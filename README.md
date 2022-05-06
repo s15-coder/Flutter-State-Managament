@@ -1,16 +1,10 @@
-# singleton_state_management
+# State Management
 
-A new Flutter project.
+A flutter project created along the [Fernando Herrera course](https://www.udemy.com/course/flutter-avanzado-fernando-herrera/) where explains the differences between the state management alternatives in a very simple way.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+State management types explained:
+1. [GetX](https://pub.dev/packages/get) - [GetX branch]( https://github.com/s15-coder/Flutter-State-Managament/tree/branch/GetX)
+2. [BLoC](https://pub.dev/packages/flutter_bloc) - [BLoC branch]( https://github.com/s15-coder/Flutter-State-Managament/tree/branch/bloc)
+3. [Cubit](https://pub.dev/packages/flutter_bloc) - [Cubit branch]( https://github.com/s15-coder/Flutter-State-Managament/tree/branch/cubit)
+4. [Provider](https://pub.dev/packages/provider) - [Provider branch]( https://github.com/s15-coder/Flutter-State-Managament/tree/branch/provider)
+5. [Singleton](https://flutterbyexample.com/lesson/singletons) - [Singleton branch]( https://github.com/s15-coder/Flutter-State-Managament/tree/branch/singleton)
